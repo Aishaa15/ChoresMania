@@ -4,16 +4,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.*;
 
-public class MainPage extends JFrame
+public class Themainpage extends JFrame
 {
-    public static void main(String[] args)
-    {
-        Themainpage();
-    }
-
-    private static void Themainpage() 
-    {
-        //creating the window
+     //creating the window
+     public Themainpage()
+     {
         JFrame window = new JFrame("Chores Mania");
         window.setSize(1000,1000);
 
@@ -41,6 +36,5 @@ public class MainPage extends JFrame
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
         window.setVisible(true);
-    } 
-
+     }
 }
