@@ -17,6 +17,40 @@ public class App {
   private static final String JSON_FILE_PATH = "accounts.json";
 
   public static void main(String[] args) throws Exception {
+    JSONParser parser = new JSONParser();
+    JSONArray accounts = (JSONArray) parser.parse(new FileReader("accounts.json"));
+    Scanner scanner = new Scanner(System.in);
+    //use the get method to check input against 
+    
+    System.out.println("Enter username");
+    String userName = scanner.nextLine();  // Read user input
+    System.out.println("Username is: " + userName);
+
+    System.out.println("Enter password");
+    String passWord = scanner.nextLine(); 
+    System.out.println("Password is: " + passWord);
+    Boolean userNameMatches = false;
+    Boolean passwordMatches = false;
+    for (Object o : accounts)
+    {
+      JSONObject person = (JSONObject) o;
+      String username = (String) person.get("username");
+      if(userName == username){
+        userNameMatches = true;
+      }
+
+
+      String password = (String) person.get("password");
+      System.out.println(password);
+      if(password == passWord){
+        passwordMatches = true;
+      }
+    }
+
+    if(userNameMatches && passwordMatches){
+      //do something
+    }
+
     //creating the data structure
     JSONObject jo = new JSONObject();
     jo.put("username", "John");
