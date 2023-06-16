@@ -14,11 +14,12 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class App {
-  private static final String JSON_FILE_PATH = "accounts.json";
+  //replace file path with your file path
+  private static final String JSON_FILE_PATH = "/Users/kuroliu/chores mania/demo/src/main/java/choresmania/accounts.json";
 
   public static void main(String[] args) throws Exception {
     JSONParser parser = new JSONParser();
-    JSONArray accounts = (JSONArray) parser.parse(new FileReader("accounts.json"));
+    JSONArray accounts = (JSONArray) parser.parse(new FileReader(JSON_FILE_PATH));
     Scanner scanner = new Scanner(System.in);
     //use the get method to check input against 
     
@@ -35,25 +36,35 @@ public class App {
     {
       JSONObject person = (JSONObject) o;
       String username = (String) person.get("username");
-      if(userName == username){
+      System.out.println("username is: " + username);
+      System.out.println("userName is: " + userName);
+      if(username.equals(userName)){
         userNameMatches = true;
+        System.out.println("username matches: " + userNameMatches);
       }
 
 
       String password = (String) person.get("password");
-      System.out.println(password);
-      if(password == passWord){
+      System.out.println("password is: " + password);
+      if(password.equals(passWord)){
         passwordMatches = true;
+        System.out.println("password matches: " + passwordMatches);
       }
     }
 
+    System.out.println("username matches: " + userNameMatches);
+    System.out.println("password matches: " + passwordMatches);
+
     if(userNameMatches && passwordMatches){
       //do something
+      System.out.println("matches");
+    } else {
+      System.out.println("Username or password incorrect");
     }
 
     //creating the data structure
     JSONObject jo = new JSONObject();
-    jo.put("username", "John");
+    jo.put("username", "john");
     jo.put("email", "sdkn@gmail.com");
     jo.put("password", "1234AZ");
     jo.put("securityQuestion", "What's your favorite color?");
@@ -79,9 +90,10 @@ public class App {
 
     System.out.println(ja);
 
-    try (FileWriter file = new FileWriter("accounts.json")) {
+    try (FileWriter file = new FileWriter(JSON_FILE_PATH)) {
             file.write(ja.toJSONString()); 
             file.flush();
+            file.close();
  
         } catch (IOException e) {
             e.printStackTrace();
