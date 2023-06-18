@@ -13,67 +13,88 @@ public class SignUpPage extends JFrame {
     private JTextField emailField;
     private JTextField securityQuestionField;
     private JTextField securityAnswerField;
-    
-    private LoginPage loginPage; 
+
+    private LoginPage loginPage;
 
     public SignUpPage() {
         initializeUI();
     }
-    
-     public void setLoginPage(LoginPage loginPage) {
+
+    public void setLoginPage(LoginPage loginPage) {
         this.loginPage = loginPage;
     }
 
     private void initializeUI() {
+        // Set the title and size of the window
         setTitle("Sign Up");
         setSize(300, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        // Create a panel with null layout
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(7, 2));
+        panel.setLayout(null);
 
+        // Labels and text fields for user input
         JLabel nameLabel = new JLabel("Name:");
-        nameField = new JTextField(20);
-        panel.add(nameLabel);
-        panel.add(nameField);
+        nameLabel.setBounds(10, 10, 80, 20);
+        nameField = new JTextField();
+        nameField.setBounds(100, 10, 150, 20);
 
         JLabel usernameLabel = new JLabel("Username:");
-        usernameField = new JTextField(20);
-        panel.add(usernameLabel);
-        panel.add(usernameField);
+        usernameLabel.setBounds(10, 40, 80, 20);
+        usernameField = new JTextField();
+        usernameField.setBounds(100, 40, 150, 20);
 
         JLabel passwordLabel = new JLabel("Password:");
-        passwordField = new JPasswordField(20);
-        panel.add(passwordLabel);
-        panel.add(passwordField);
+        passwordLabel.setBounds(10, 70, 80, 20);
+        passwordField = new JPasswordField();
+        passwordField.setBounds(100, 70, 150, 20);
 
         JLabel emailLabel = new JLabel("Email:");
-        emailField = new JTextField(20);
-        panel.add(emailLabel);
-        panel.add(emailField);
+        emailLabel.setBounds(10, 100, 80, 20);
+        emailField = new JTextField();
+        emailField.setBounds(100, 100, 150, 20);
 
         JLabel securityQuestionLabel = new JLabel("Security Question:");
-        securityQuestionField = new JTextField(20);
-        panel.add(securityQuestionLabel);
-        panel.add(securityQuestionField);
+        securityQuestionLabel.setBounds(10, 130, 120, 20);
+        securityQuestionField = new JTextField();
+        securityQuestionField.setBounds(140, 130, 150, 20);
 
         JLabel securityAnswerLabel = new JLabel("Security Answer:");
-        securityAnswerField = new JTextField(20);
-        panel.add(securityAnswerLabel);
-        panel.add(securityAnswerField);
+        securityAnswerLabel.setBounds(10, 160, 120, 20);
+        securityAnswerField = new JTextField();
+        securityAnswerField.setBounds(140, 160, 150, 20);
 
+        // Sign Up button
         JButton signUpButton = new JButton("Sign Up");
+        signUpButton.setBounds(100, 200, 100, 30);
         signUpButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 signUp();
             }
         });
+
+        // Adding components to the panel
+        panel.add(nameLabel);
+        panel.add(nameField);
+        panel.add(usernameLabel);
+        panel.add(usernameField);
+        panel.add(passwordLabel);
+        panel.add(passwordField);
+        panel.add(emailLabel);
+        panel.add(emailField);
+        panel.add(securityQuestionLabel);
+        panel.add(securityQuestionField);
+        panel.add(securityAnswerLabel);
+        panel.add(securityAnswerField);
         panel.add(signUpButton);
 
+        // Add the panel to the window
         add(panel);
         setVisible(true);
     }
 
+    // Method to handle sign up process
     private void signUp() {
         String name = nameField.getText();
         String username = usernameField.getText();
@@ -93,7 +114,8 @@ public class SignUpPage extends JFrame {
         securityQuestionField.setText("");
         securityAnswerField.setText("");
     }
-
+    
+    // Method to save user information to a file
     private void saveUserInformation(String name, String username, String password, String email,
                                      String securityQuestion, String securityAnswer) {
         try {
