@@ -103,18 +103,24 @@ public class SignUpPage extends JFrame {
         String securityQuestion = securityQuestionField.getText();
         String securityAnswer = securityAnswerField.getText();
 
-        saveUserInformation(name, username, password, email, securityQuestion, securityAnswer);
-        JOptionPane.showMessageDialog(this, "Sign up successful!");
+        // Check if any field is empty
+        if (name.isEmpty() || username.isEmpty() || password.isEmpty() || email.isEmpty()
+                || securityQuestion.isEmpty() || securityAnswer.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Sign up not successful. Please try again.");
+        } else {
+            saveUserInformation(name, username, password, email, securityQuestion, securityAnswer);
+            JOptionPane.showMessageDialog(this, "Sign up successful!");
 
-        // Clear the fields after sign-up
-        nameField.setText("");
-        usernameField.setText("");
-        passwordField.setText("");
-        emailField.setText("");
-        securityQuestionField.setText("");
-        securityAnswerField.setText("");
+            // Clear the fields after sign-up
+            nameField.setText("");
+            usernameField.setText("");
+            passwordField.setText("");
+            emailField.setText("");
+            securityQuestionField.setText("");
+            securityAnswerField.setText("");
+        }
     }
-    
+
     // Method to save user information to a file
     private void saveUserInformation(String name, String username, String password, String email,
                                      String securityQuestion, String securityAnswer) {
