@@ -1,5 +1,10 @@
+package choresmania;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -7,10 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import java.awt.*;
 
-
-public class login extends Themainpage
+public class login 
 {
     //create login page
     public login()
@@ -49,6 +52,7 @@ public class login extends Themainpage
       //create passwordfield
       JPasswordField password = new JPasswordField();
       password.setBounds(500,400,200,40);
+      password.getPassword();
       window2.add(password);
 
       //create login button 
@@ -61,9 +65,17 @@ public class login extends Themainpage
       {
         public void actionPerformed(ActionEvent e)
         {
-               
+          
+         
         }
       });
+
+      //add an image 
+
+      ImageIcon image2 = new ImageIcon("cat2.png");
+      JLabel label_image2 = new JLabel(image2);
+      label_image2.setBounds(150, 10, 1300, 1300);
+      window2.add(label_image2);
 
       window2.setLayout(null);
       window2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
