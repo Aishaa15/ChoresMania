@@ -1,10 +1,19 @@
-import javax.swing.*;
-import java.awt.*;
+package choresmania;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 public class SignUpPage extends JFrame {
     private JTextField nameField;
@@ -14,60 +23,74 @@ public class SignUpPage extends JFrame {
     private JTextField securityQuestionField;
     private JTextField securityAnswerField;
 
-    private LoginPage loginPage;
+    private login loginPage;
 
     public SignUpPage() {
         initializeUI();
     }
 
-    public void setLoginPage(LoginPage loginPage) {
+    public void setLoginPage(login loginPage) {
         this.loginPage = loginPage;
     }
 
     private void initializeUI() {
         // Set the title and size of the window
         setTitle("Sign Up");
-        setSize(300, 300);
+        setSize(1000, 1000);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Create a panel with null layout
         JPanel panel = new JPanel();
         panel.setLayout(null);
 
+        //set background coloe
+        panel.setBackground(new Color(247, 205, 208));
+        
+        //create header 
+        JLabel headersignup = new JLabel("Signup");
+        headersignup.setBounds(420,50,500,80);
+        headersignup.setFont(new Font("Serif", Font.BOLD,55));
+        
         // Labels and text fields for user input
         JLabel nameLabel = new JLabel("Name:");
-        nameLabel.setBounds(10, 10, 80, 20);
+        nameLabel.setBounds(350, 200, 200, 30);
+        nameLabel.setFont(new Font("", Font.BOLD, 20));
         nameField = new JTextField();
-        nameField.setBounds(100, 10, 150, 20);
+        nameField.setBounds(500, 200, 200, 40);
 
         JLabel usernameLabel = new JLabel("Username:");
-        usernameLabel.setBounds(10, 40, 80, 20);
+        usernameLabel.setBounds(350, 280, 200, 30);
+        usernameLabel.setFont(new Font("", Font.BOLD, 20));
         usernameField = new JTextField();
-        usernameField.setBounds(100, 40, 150, 20);
+        usernameField.setBounds(500, 280, 200, 40);
 
         JLabel passwordLabel = new JLabel("Password:");
-        passwordLabel.setBounds(10, 70, 80, 20);
+        passwordLabel.setBounds(350, 360, 200, 30);
+        passwordLabel.setFont(new Font("", Font.BOLD, 20));
         passwordField = new JPasswordField();
-        passwordField.setBounds(100, 70, 150, 20);
+        passwordField.setBounds(500, 360, 200, 40);
 
         JLabel emailLabel = new JLabel("Email:");
-        emailLabel.setBounds(10, 100, 80, 20);
+        emailLabel.setBounds(350, 440, 200, 30);
+        emailLabel.setFont(new Font("", Font.BOLD, 20));
         emailField = new JTextField();
-        emailField.setBounds(100, 100, 150, 20);
+        emailField.setBounds(500, 440, 200, 40);
 
-        JLabel securityQuestionLabel = new JLabel("Security Question:");
-        securityQuestionLabel.setBounds(10, 130, 120, 20);
+        JLabel securityQuestionLabel = new JLabel("Security Q:");
+        securityQuestionLabel.setFont(new Font("", Font.BOLD, 20));
+        securityQuestionLabel.setBounds(350, 520, 200, 30);
         securityQuestionField = new JTextField();
-        securityQuestionField.setBounds(140, 130, 150, 20);
+        securityQuestionField.setBounds(500, 520, 200, 40);
 
-        JLabel securityAnswerLabel = new JLabel("Security Answer:");
-        securityAnswerLabel.setBounds(10, 160, 120, 20);
+        JLabel securityAnswerLabel = new JLabel("Security A:");
+        securityAnswerLabel.setFont(new Font("", Font.BOLD, 20));
+        securityAnswerLabel.setBounds(350, 600, 200, 30);
         securityAnswerField = new JTextField();
-        securityAnswerField.setBounds(140, 160, 150, 20);
+        securityAnswerField.setBounds(500, 600, 200, 40);
 
         // Sign Up button
         JButton signUpButton = new JButton("Sign Up");
-        signUpButton.setBounds(100, 200, 100, 30);
+        signUpButton.setBounds(450, 710, 100, 40);
         signUpButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 signUp();
@@ -77,6 +100,7 @@ public class SignUpPage extends JFrame {
         // Adding components to the panel
         panel.add(nameLabel);
         panel.add(nameField);
+        panel.add(headersignup);
         panel.add(usernameLabel);
         panel.add(usernameField);
         panel.add(passwordLabel);
@@ -88,6 +112,7 @@ public class SignUpPage extends JFrame {
         panel.add(securityAnswerLabel);
         panel.add(securityAnswerField);
         panel.add(signUpButton);
+       
 
         // Add the panel to the window
         add(panel);
@@ -110,6 +135,8 @@ public class SignUpPage extends JFrame {
         } else {
             saveUserInformation(name, username, password, email, securityQuestion, securityAnswer);
             JOptionPane.showMessageDialog(this, "Sign up successful!");
+            dispose();
+            login menu = new login();
 
             // Clear the fields after sign-up
             nameField.setText("");
