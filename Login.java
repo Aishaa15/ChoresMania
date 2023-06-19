@@ -1,10 +1,22 @@
-import javax.swing.*;
-import java.awt.*;
+package choresmania;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 public class Login extends JFrame {
     private JTextField usernameField;
@@ -19,7 +31,7 @@ public class Login extends JFrame {
     private void initializeUI() {
         // Set the title and size of the window
         setTitle("Login");
-        setSize(600, 400);
+        setSize(1000, 1000);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Create a panel with null layout
@@ -78,7 +90,17 @@ public class Login extends JFrame {
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line;
             boolean found = false;
-
+            Scanner sc = new Scanner(new File(fileName));
+            //instantiating the StringBuffer class
+            StringBuffer buffer = new StringBuffer();
+            //Reading lines of the file and appending them to StringBuffer
+            while (sc.hasNextLine()) {
+                buffer.append(sc.nextLine()+System.lineSeparator());
+            }
+            String fileContents = buffer.toString();
+            System.out.println("Contents of the file: "+fileContents);
+            //closing the Scanner object
+            sc.close();
             while ((line = reader.readLine()) != null) {
                 if (line.startsWith("Username: ")) {
                     String savedUsername = line.substring(10);
@@ -90,6 +112,17 @@ public class Login extends JFrame {
 
                         if (username.equals(savedUsername) && password.equals(savedPassword)) {
                             found = true;
+                            
+                            String loginInfo = reader.readLine();
+                            String newLogin = username + " Login: true";
+                            System.out.println("old data: "+fileContents);
+                            fileContents = fileContents.replace(loginInfo, newLogin);
+                            FileWriter writer = new FileWriter(fileName);
+                            System.out.println("");
+                            System.out.println("new data: "+fileContents);
+                            writer.append(fileContents);
+                            System.out.println(loginInfo);
+                            writer.close();
                             break;
                         }
                     }
@@ -99,6 +132,7 @@ public class Login extends JFrame {
             if (found) {
                 JOptionPane.showMessageDialog(this, "Login successful!");
                 dispose();
+                Dashboard dashboard = new Dashboard();
                 // Place your code here for the next step after successful login
             } else {
                 JOptionPane.showMessageDialog(this, "Login failed. Please try again.");
