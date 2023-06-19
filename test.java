@@ -1,10 +1,3 @@
-package choresmania;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
@@ -22,7 +15,6 @@ public class test {
                 buffer.append(sc.nextLine()+System.lineSeparator());
             }
             String fileContents = buffer.toString();
-            System.out.println("Contents of the file: "+fileContents);
             //closing the Scanner object
             sc.close();
             while ((line = reader.readLine()) != null) {
