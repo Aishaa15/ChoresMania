@@ -1,8 +1,9 @@
-package choresmania;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -23,13 +24,13 @@ public class SignUpPage extends JFrame {
     private JTextField securityQuestionField;
     private JTextField securityAnswerField;
 
-    private login loginPage;
+    private Login loginPage;
 
     public SignUpPage() {
         initializeUI();
     }
 
-    public void setLoginPage(login loginPage) {
+    public void setLoginPage(Login loginPage) {
         this.loginPage = loginPage;
     }
 
@@ -43,14 +44,14 @@ public class SignUpPage extends JFrame {
         JPanel panel = new JPanel();
         panel.setLayout(null);
 
-        //set background coloe
+        // Set background color
         panel.setBackground(new Color(247, 205, 208));
-        
-        //create header 
+
+        // Create header
         JLabel headersignup = new JLabel("Signup");
-        headersignup.setBounds(420,50,500,80);
-        headersignup.setFont(new Font("Serif", Font.BOLD,55));
-        
+        headersignup.setBounds(420, 50, 500, 80);
+        headersignup.setFont(new Font("Serif", Font.BOLD, 55));
+
         // Labels and text fields for user input
         JLabel nameLabel = new JLabel("Name:");
         nameLabel.setBounds(350, 200, 200, 30);
@@ -112,7 +113,6 @@ public class SignUpPage extends JFrame {
         panel.add(securityAnswerLabel);
         panel.add(securityAnswerField);
         panel.add(signUpButton);
-       
 
         // Add the panel to the window
         add(panel);
@@ -136,7 +136,6 @@ public class SignUpPage extends JFrame {
             saveUserInformation(name, username, password, email, securityQuestion, securityAnswer);
             JOptionPane.showMessageDialog(this, "Sign up successful!");
             dispose();
-            login menu = new login();
 
             // Clear the fields after sign-up
             nameField.setText("");
@@ -145,6 +144,10 @@ public class SignUpPage extends JFrame {
             emailField.setText("");
             securityQuestionField.setText("");
             securityAnswerField.setText("");
+
+            // Create an instance of the login page and pass the file name
+            Login login = new Login("user_information.txt");
+            login.setVisible(true);
         }
     }
 
