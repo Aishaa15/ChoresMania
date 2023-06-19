@@ -1,0 +1,17 @@
+Name: armeena
+Username: haha
+Password: dog
+haha Login: true
+Email: armeenasjaj
+Security Question: cat
+Security Answer: cat
+Chores: a, b, c, d
+
+Name: 1
+Username: 2
+Password: 3
+1 Login: false
+Email: 4
+Security Question: 5
+Security Answer: 6
+Chores: a, b, c, d
