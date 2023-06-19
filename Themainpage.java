@@ -1,57 +1,44 @@
-package choresmania;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import java.awt.*;
+import javax.swing.*;
 
+public class Themainpage extends JFrame {
 
-public class Themainpage extends JFrame
-{
-        
-    public Themainpage()
-    {
-        //creating main window
+    public Themainpage() {
+        // Creating main window
         JFrame window = new JFrame("Chores Mania");
-        window.setSize(1000,1000);
- 
-        //set the background colour
+        window.setSize(1000, 1000);
+
+        // Set the background color
         Container cp = window.getContentPane();
         cp.setBackground(new Color(247, 205, 208));
 
-        //add title image
+        // Add title image
         ImageIcon image = new ImageIcon("chores.png");
         JLabel label_image = new JLabel(image);
         label_image.setBounds(180, 50, 600, 500);
         window.add(label_image);
 
-        //create login button 
-        JButton Login = new JButton("Login");
-        Login.setBounds(380,550,250,40);
-        window.add(Login);
+        // Create login button
+        JButton loginButton = new JButton("Login");
+        loginButton.setBounds(380, 550, 250, 40);
+        window.add(loginButton);
 
-        //connect login button to login window
-        Login.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-              login menu = new login();
-            
+        // Connect login button to login window
+        loginButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Login menu = new Login("user_information.txt");
             }
         });
 
+        // Create sign up button
+        JButton signupButton = new JButton("Sign up");
+        signupButton.setBounds(380, 650, 250, 40);
+        window.add(signupButton);
 
-        //create sign up button
-        JButton signup = new JButton("Sign up");
-        signup.setBounds(380,650,250,40);
-        window.add(signup);
-
-        signup.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        signupButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
                 window.dispose();
                 SignUpPage menu = new SignUpPage();
             }
