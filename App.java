@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Collections;
+import java.util.Random;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -49,6 +51,13 @@ public class App {
       if(password.equals(passWord)){
         passwordMatches = true;
         System.out.println("password matches: " + passwordMatches);
+      }
+
+      if(userNameMatches && passwordMatches){
+        break;
+      } else {
+        userNameMatches = false;
+        passwordMatches = false;
       }
     }
 
@@ -98,5 +107,55 @@ public class App {
         } catch (IOException e) {
             e.printStackTrace();
         }
+  
+    try (FileReader reader = new FileReader("accounts.json")) {
+            Object obj = parser.parse(reader);
+            JSONArray accounts2 = (JSONArray) obj;
+
+            List<String> family = new ArrayList<>();
+            family.add("FamilyMember1");
+            family.add("FamilyMember2");
+            family.add("FamilyMember3");
+            //add more family members as needed
+
+            List<String> chores = new ArrayList<>();
+            chores.add("Chore1");
+            chores.add("Chore2");
+            chores.add("Chore3");
+            //add more chores as needed
+
+            Collections.shuffle(chores);
+
+            List<String> assignedChores2 = new ArrayList<>();
+            List<String> unassignedChores2 = new ArrayList<>(chores);
+            int choresPerFamilyMember = unassignedChores.size() / family.size();
+
+            for (String member2 : family) {
+                for (int i = 0; i < choresPerFamilyMember; i++) {
+                    int randomIndex = new Random().nextInt(unassignedChores.size());
+                    assignedChores.add(unassignedChores.get(randomIndex));
+                    unassignedChores.remove(randomIndex);
+                }
+            }
+
+            if (!unassignedChores.isEmpty()) {
+                for (String chore : unassignedChores2) {
+                    int randomIndex = new Random().nextInt(family.size());
+                    assignedChores.add(chore + " assigned to " + family.get(randomIndex));
+                }
+            }
+
+            try (FileWriter writer = new FileWriter("accounts.json")) {
+                writer.write(accounts.toJSONString());
+                writer.flush();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+  
   }
+
 }
