@@ -1,16 +1,10 @@
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-public class Themainpage extends JFrame {
 
-    public Themainpage() {
-        // Creating main window
-        JFrame window = new JFrame("Chores Mania");
-        window.setSize(1000, 1000);
-
-        // Set the background color
         Container cp = window.getContentPane();
         cp.setBackground(new Color(247, 205, 208));
 
@@ -37,8 +31,12 @@ public class Themainpage extends JFrame {
         signupButton.setBounds(380, 650, 250, 40);
         window.add(signupButton);
 
-        signupButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+
+
+        signup.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
                 window.dispose();
                 SignUpPage menu = new SignUpPage();
             }

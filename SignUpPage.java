@@ -1,9 +1,9 @@
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.FileReader;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -24,13 +24,12 @@ public class SignUpPage extends JFrame {
     private JTextField securityQuestionField;
     private JTextField securityAnswerField;
 
-    private Login loginPage;
 
     public SignUpPage() {
         initializeUI();
     }
 
-    public void setLoginPage(Login loginPage) {
+
         this.loginPage = loginPage;
     }
 
@@ -44,75 +43,6 @@ public class SignUpPage extends JFrame {
         JPanel panel = new JPanel();
         panel.setLayout(null);
 
-        // Set background color
-        panel.setBackground(new Color(247, 205, 208));
-
-        // Create header
-        JLabel headersignup = new JLabel("Signup");
-        headersignup.setBounds(420, 50, 500, 80);
-        headersignup.setFont(new Font("Serif", Font.BOLD, 55));
-
-        // Labels and text fields for user input
-        JLabel nameLabel = new JLabel("Name:");
-        nameLabel.setBounds(350, 200, 200, 30);
-        nameLabel.setFont(new Font("", Font.BOLD, 20));
-        nameField = new JTextField();
-        nameField.setBounds(500, 200, 200, 40);
-
-        JLabel usernameLabel = new JLabel("Username:");
-        usernameLabel.setBounds(350, 280, 200, 30);
-        usernameLabel.setFont(new Font("", Font.BOLD, 20));
-        usernameField = new JTextField();
-        usernameField.setBounds(500, 280, 200, 40);
-
-        JLabel passwordLabel = new JLabel("Password:");
-        passwordLabel.setBounds(350, 360, 200, 30);
-        passwordLabel.setFont(new Font("", Font.BOLD, 20));
-        passwordField = new JPasswordField();
-        passwordField.setBounds(500, 360, 200, 40);
-
-        JLabel emailLabel = new JLabel("Email:");
-        emailLabel.setBounds(350, 440, 200, 30);
-        emailLabel.setFont(new Font("", Font.BOLD, 20));
-        emailField = new JTextField();
-        emailField.setBounds(500, 440, 200, 40);
-
-        JLabel securityQuestionLabel = new JLabel("Security Q:");
-        securityQuestionLabel.setFont(new Font("", Font.BOLD, 20));
-        securityQuestionLabel.setBounds(350, 520, 200, 30);
-        securityQuestionField = new JTextField();
-        securityQuestionField.setBounds(500, 520, 200, 40);
-
-        JLabel securityAnswerLabel = new JLabel("Security A:");
-        securityAnswerLabel.setFont(new Font("", Font.BOLD, 20));
-        securityAnswerLabel.setBounds(350, 600, 200, 30);
-        securityAnswerField = new JTextField();
-        securityAnswerField.setBounds(500, 600, 200, 40);
-
-        // Sign Up button
-        JButton signUpButton = new JButton("Sign Up");
-        signUpButton.setBounds(450, 710, 100, 40);
-        signUpButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                signUp();
-            }
-        });
-
-        // Adding components to the panel
-        panel.add(nameLabel);
-        panel.add(nameField);
-        panel.add(headersignup);
-        panel.add(usernameLabel);
-        panel.add(usernameField);
-        panel.add(passwordLabel);
-        panel.add(passwordField);
-        panel.add(emailLabel);
-        panel.add(emailField);
-        panel.add(securityQuestionLabel);
-        panel.add(securityQuestionField);
-        panel.add(securityAnswerLabel);
-        panel.add(securityAnswerField);
-        panel.add(signUpButton);
 
         // Add the panel to the window
         add(panel);
@@ -137,6 +67,7 @@ public class SignUpPage extends JFrame {
             JOptionPane.showMessageDialog(this, "Sign up successful!");
             dispose();
 
+
             // Clear the fields after sign-up
             nameField.setText("");
             usernameField.setText("");
@@ -145,9 +76,6 @@ public class SignUpPage extends JFrame {
             securityQuestionField.setText("");
             securityAnswerField.setText("");
 
-            // Create an instance of the login page and pass the file name
-            Login login = new Login("user_information.txt");
-            login.setVisible(true);
         }
     }
 
@@ -168,4 +96,4 @@ public class SignUpPage extends JFrame {
             e.printStackTrace();
         }
     }
-}
+
