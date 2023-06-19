@@ -1,75 +1,115 @@
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
-import java.awt.*;
+public class Login extends JFrame {
+    private JTextField usernameField;
+    private JPasswordField passwordField;
+    private String fileName;
 
+    public Login(String fileName) {
+        this.fileName = fileName;
+        initializeUI();
+    }
 
-public class login extends Themainpage
-{
-    //create login page
-    public login()
-    {
-      //make login window
-      JFrame window2 = new JFrame("Login");
-      window2.setSize(1000,1000);
-      
-      //set background color
-      Container dp = window2.getContentPane();
-      dp.setBackground(new Color(247, 205, 208));
-      
-      //Create header label
-      JLabel header = new JLabel("Login");
-      header.setBounds(450,100,500,80);
-      header.setFont(new Font("Serif", Font.BOLD,55));
-      window2.add(header);
-     
-      //create username label
-      JLabel user_name = new JLabel("Username:");
-      user_name.setBounds(380, 300, 200, 30);
-      user_name.setFont(new Font("", Font.BOLD, 20));
-      window2.add(user_name);
-     
-      //create textfield for username
-      JTextField username = new JTextField();
-      username.setBounds(500,300,200,40);
-      window2.add(username);
+    private void initializeUI() {
+        // Set the title and size of the window
+        setTitle("Login");
+        setSize(600, 400);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-      //create password label
-      JLabel pass_word = new JLabel("Password:");
-      pass_word.setBounds(380,400,200,30);
-      pass_word.setFont(new Font("", Font.BOLD,20));
-      window2.add(pass_word);
+        // Create a panel with null layout
+        JPanel panel = new JPanel();
+        panel.setLayout(null);
 
-      //create passwordfield
-      JPasswordField password = new JPasswordField();
-      password.setBounds(500,400,200,40);
-      window2.add(password);
+        // Set background color
+        panel.setBackground(new Color(247, 205, 208));
 
-      //create login button 
-      JButton login_button = new JButton("Login");
-      login_button.setBounds(500,550,100,40);
-      window2.add(login_button);
+        // Create header
+        JLabel header = new JLabel("Login");
+        header.setBounds(260, 50, 300, 80);
+        header.setFont(new Font("Serif", Font.BOLD, 55));
 
-      //add actionlistener 
-      login_button.addActionListener(new ActionListener()
-      {
-        public void actionPerformed(ActionEvent e)
-        {
-               
+        // Labels and text fields for user input
+        JLabel usernameLabel = new JLabel("Username:");
+        usernameLabel.setBounds(150, 180, 200, 30);
+        usernameLabel.setFont(new Font("", Font.BOLD, 20));
+        usernameField = new JTextField();
+        usernameField.setBounds(300, 180, 200, 40);
+
+        JLabel passwordLabel = new JLabel("Password:");
+        passwordLabel.setBounds(150, 250, 200, 30);
+        passwordLabel.setFont(new Font("", Font.BOLD, 20));
+        passwordField = new JPasswordField();
+        passwordField.setBounds(300, 250, 200, 40);
+
+        // Login button
+        JButton loginButton = new JButton("Login");
+        loginButton.setBounds(260, 320, 80, 40);
+        loginButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                login();
+            }
+        });
+
+        // Adding components to the panel
+        panel.add(header);
+        panel.add(usernameLabel);
+        panel.add(usernameField);
+        panel.add(passwordLabel);
+        panel.add(passwordField);
+        panel.add(loginButton);
+
+        // Add the panel to the window
+        add(panel);
+        setVisible(true);
+    }
+
+    // Method to handle login process
+    private void login() {
+        String username = usernameField.getText();
+        String password = new String(passwordField.getPassword());
+
+        // Read the user information from the file
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            String line;
+            boolean found = false;
+
+            while ((line = reader.readLine()) != null) {
+                if (line.startsWith("Username: ")) {
+                    String savedUsername = line.substring(10);
+
+                    // Read the next line for password
+                    String passwordLine = reader.readLine();
+                    if (passwordLine != null && passwordLine.startsWith("Password: ")) {
+                        String savedPassword = passwordLine.substring(10);
+
+                        if (username.equals(savedUsername) && password.equals(savedPassword)) {
+                            found = true;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            if (found) {
+                JOptionPane.showMessageDialog(this, "Login successful!");
+                dispose();
+                // Place your code here for the next step after successful login
+            } else {
+                JOptionPane.showMessageDialog(this, "Login failed. Please try again.");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "An error occurred while reading the file.");
         }
-      });
 
-      window2.setLayout(null);
-      window2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      window2.setVisible(true);
-      window2.setResizable(false);
-
-
+        // Clear the fields after login attempt
+        usernameField.setText("");
+        passwordField.setText("");
     }
 }
