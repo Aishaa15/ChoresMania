@@ -130,9 +130,18 @@ public class Dashboard
       gobtn.addActionListener(new ActionListener() 
       {
         public void actionPerformed(ActionEvent e) 
-        {
-          
-        }
+            {
+                String groceryText = grocerylist.getText();
+
+                // Save the text to the file
+                try (FileWriter writer = new FileWriter("User_information.txt")) {
+                    writer.write(groceryText);
+                    JOptionPane.showMessageDialog(null, "Information saved successfully!");
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "An error occurred while saving the information.");
+                }
+            }
         
            
       });
