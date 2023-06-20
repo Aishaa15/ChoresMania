@@ -82,7 +82,6 @@ public class Dashboard
             e.printStackTrace();
             }
       
-      securityQuestion += "";
       //make login window
       window4.setSize(1500,1500);
       
@@ -153,6 +152,7 @@ public class Dashboard
             String email = null;
             String chores = null;
             String groceryList = null;
+            String name = null;
             ArrayList<String> allChores = new ArrayList<String>();
             allChores.add(chore1.getText());
             allChores.add(chore2.getText());
@@ -172,10 +172,7 @@ public class Dashboard
                 String fileContents = buffer.toString();
                 sc.close();
                 while ((line = reader.readLine()) != null) {
-                    if (line.startsWith("Name: ")) {
-
-                        
-                        savedUsername = reader.readLine();
+                    if (line.startsWith("Username: ")) {
                         savedUsername = line.substring(10);
 
                         // Read the next line for password
@@ -192,7 +189,10 @@ public class Dashboard
                         groceryList = grocery.substring(15+savedUsername.length());
 
                         if(loginCheck.endsWith("true")){
-                            fileContents = fileContents.replace(choresList, savedUsername + " Chores: " + formattedChores);
+                            if (!chore1.getText().equals("")&&!chore2.getText().equals("")&&!chore3.getText().equals("")&&!chore4.getText().equals("")){
+                                fileContents = fileContents.replace(choresList, savedUsername + " Chores: " + formattedChores);
+                            }
+                            System.out.println("Saved username is: "+savedUsername);
                             fileContents = fileContents.replace(grocery, savedUsername + " Grocery List: " + grocerylist.getText());
                             FileWriter writer = new FileWriter(fileName);
                             System.out.println("");
@@ -250,8 +250,8 @@ public class Dashboard
                 }
                 System.exit(0);
             }
-    }
-});
+            }
+        });
 
     }
     public static String formatArrayList(ArrayList<String> list) {
