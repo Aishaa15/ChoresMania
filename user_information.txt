@@ -5,13 +5,21 @@ haha Login: true
 Email: armeenasjaj
 Security Question: cat
 Security Answer: cat
-Chores: a, b, c, d
+haha Chores: 3, 4, 2, 1
 
 Name: 1
 Username: 2
 Password: 3
-1 Login: false
+2 Login: false
 Email: 4
 Security Question: 5
 Security Answer: 6
-Chores: a, b, c, d
+2 Chores: ttt, bbb, eeee, aaa
+
+Name: aaaaaa
+Username: guy
+Password: 1
+guy Login: false
+Security Question: dfdsh
+Security Answer: ss
+guy Chores: ttt, bbb, eeee, aaa
