@@ -1,11 +1,12 @@
 Name: armeena
 Username: haha
 Password: dog
-haha Login: true
+haha Login: false
 Email: armeenasjaj
 Security Question: cat
 Security Answer: cat
 haha Chores: 3, 4, 2, 1
+haha Grocery list: ksdjfsdgb
 
 Name: 1
 Username: 2
@@ -15,6 +16,7 @@ Email: 4
 Security Question: 5
 Security Answer: 6
 2 Chores: ttt, bbb, eeee, aaa
+2 Grocery list: ksdjfsdgb
 
 Name: aaaaaa
 Username: guy
@@ -23,3 +25,4 @@ guy Login: false
 Security Question: dfdsh
 Security Answer: ss
 guy Chores: ttt, bbb, eeee, aaa
+guy Grocery list: ksdjfsdgb
