@@ -14,7 +14,9 @@ import javax.swing.JTextField;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Dashboard 
@@ -29,6 +31,10 @@ public class Dashboard
         String savedUsername = null;
         String passwordLine = null;
         String email = null;
+        String family1 = null;
+        String family2 = null;
+        String family3 = null;
+        String family4 = null;
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line;
             Scanner sc = new Scanner(new File(fileName));
@@ -55,6 +61,10 @@ public class Dashboard
                     securityQuestion = reader.readLine();
                     securityAnswer = reader.readLine();
                     String choresList = reader.readLine();
+                    family1 = reader.readLine();
+                    family2 = reader.readLine();
+                    family3 = reader.readLine();
+                    family4 = reader.readLine();
                     choresList = choresList.substring(8);
                     if(loginCheck.endsWith("true")){
                         System.out.println("Current user: " + savedUsername);
@@ -130,18 +140,63 @@ public class Dashboard
       gobtn.addActionListener(new ActionListener() 
       {
         public void actionPerformed(ActionEvent e) 
-            {
-                String groceryText = grocerylist.getText();
-
-                // Save the text to the file
-                try (FileWriter writer = new FileWriter("User_information.txt")) {
-                    writer.write(groceryText);
-                    JOptionPane.showMessageDialog(null, "Information saved successfully!");
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                    JOptionPane.showMessageDialog(null, "An error occurred while saving the information.");
+        {
+            String fileName = "user_information.txt";
+            String securityQuestion = null;
+            String securityAnswer = null;
+            String savedUsername = null;
+            String passwordLine = null;
+            String email = null;
+            String chores = null;
+            ArrayList<String> allChores = new ArrayList<String>();
+            String getValue = chore1.getText();
+            allChores.add(chore1.getText());
+            allChores.add(chore2.getText());
+            allChores.add(chore3.getText());
+            allChores.add(chore4.getText());
+            try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+                String line;
+                Scanner sc = new Scanner(new File(fileName));
+                StringBuffer buffer = new StringBuffer();
+                while (sc.hasNextLine()) {
+                    buffer.append(sc.nextLine()+System.lineSeparator());
                 }
-            }
+                String fileContents = buffer.toString();
+                sc.close();
+                
+                while ((line = reader.readLine()) != null) {
+                    if (line.startsWith("Username: ")) {
+                        savedUsername = line.substring(10);
+
+                        // Read the next line for password
+                        passwordLine = reader.readLine();
+                        passwordLine = passwordLine.substring(10);
+                        String loginCheck = reader.readLine();
+                        email = reader.readLine();
+                        email = email.substring(7);
+                        securityQuestion = reader.readLine();
+                        securityAnswer = reader.readLine();
+                        String choresList = reader.readLine();
+                        chores = choresList.substring(8);
+
+                        if(loginCheck.endsWith("true")){
+                            fileContents = fileContents.replace(choresList, "Chores: A, B, C, D");
+                            FileWriter writer = new FileWriter(fileName);
+                            System.out.println("");
+                            System.out.println("new data: "+fileContents);
+                            writer.append(fileContents);
+                            writer.close();
+                            System.out.println("Current user: " + savedUsername);
+                            System.out.println("Chores: " + choresList);
+                            
+                            break;
+                        }
+                        }
+                    }
+                } catch (IOException ea) {
+                ea.printStackTrace();
+                }
+        }
         
            
       });
