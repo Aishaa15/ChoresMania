@@ -82,7 +82,7 @@ public class Login extends JFrame {
     }
 
     // Method to handle login process
-    private void login() {
+    private void Login() {
         String username = usernameField.getText();
         String password = new String(passwordField.getPassword());
 
