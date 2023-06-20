@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -29,6 +30,7 @@ public class Dashboard
  private final JTextField chore2 = new JTextField();
  private final JTextField chore3 = new JTextField();
  private final JTextField chore4 = new JTextField();
+ JFrame window4 = new JFrame("Dashboard");
      public Dashboard()
     {
 
@@ -38,6 +40,7 @@ public class Dashboard
         String savedUsername = null;
         String passwordLine = null;
         String email = null;
+        String groceryList = null;
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line;
             Scanner sc = new Scanner(new File(fileName));
@@ -65,6 +68,8 @@ public class Dashboard
                     securityAnswer = reader.readLine();
                     String choresList = reader.readLine();
                     choresList = choresList.substring(9+savedUsername.length());
+                    String grocery = reader.readLine();
+                    groceryList = grocery.substring(15+savedUsername.length());
                     if(loginCheck.endsWith("true")){
                         break;
                     }
@@ -76,7 +81,6 @@ public class Dashboard
       
       securityQuestion += "";
       //make login window
-      JFrame window4 = new JFrame("Dashboard");
       window4.setSize(1500,1500);
       
       //set background color
@@ -130,6 +134,7 @@ public class Dashboard
       window4.add(grocery);
 
       JTextArea grocerylist = new JTextArea();
+      grocerylist.setText(groceryList);
       grocerylist.setBounds(510,450,300,400);
       window4.add(grocerylist);
 
@@ -145,6 +150,7 @@ public class Dashboard
             String passwordLine = null;
             String email = null;
             String chores = null;
+            String groceryList = null;
             ArrayList<String> allChores = new ArrayList<String>();
             allChores.add(chore1.getText());
             allChores.add(chore2.getText());
@@ -177,9 +183,12 @@ public class Dashboard
                         securityAnswer = reader.readLine();
                         String choresList = reader.readLine();
                         chores = choresList.substring(9+savedUsername.length());
+                        String grocery = reader.readLine();
+                        groceryList = grocery.substring(15+savedUsername.length());
 
                         if(loginCheck.endsWith("true")){
-                            fileContents = fileContents.replace(choresList, savedUsername + " Chores: "+formattedChores);
+                            fileContents = fileContents.replace(choresList, savedUsername + " Chores: " + formattedChores);
+                            fileContents = fileContents.replace(grocery, savedUsername + " Chores: " + groceryList);
                             FileWriter writer = new FileWriter(fileName);
                             System.out.println("");
                             System.out.println("new data: "+fileContents);
@@ -195,6 +204,10 @@ public class Dashboard
                 } catch (IOException ea) {
                 ea.printStackTrace();
                 }
+            chore1.setText("");
+            chore2.setText("");
+            chore3.setText("");
+            chore4.setText("");
         }
         
            
@@ -206,7 +219,33 @@ public class Dashboard
       window4.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       window4.setVisible(true);
       window4.setResizable(false);
+      window4.addWindowListener(new java.awt.event.WindowAdapter() {
+      @Override
+      public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+            if (JOptionPane.showConfirmDialog(window4, 
+                "Are you sure you want to exit? (This will log you out)", "Close Window?", 
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
+                String fileName = "user_information.txt";
+                try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+                    Scanner sc = new Scanner(new File(fileName));
+                    StringBuffer buffer = new StringBuffer();
+                    while (sc.hasNextLine()) {
+                        buffer.append(sc.nextLine()+System.lineSeparator());
+                    }
+                    String fileContents = buffer.toString();
+                    fileContents = fileContents.replace("Login: true", "Login: false");
+                    FileWriter writer = new FileWriter(fileName);
+                    writer.append(fileContents);
+                    writer.close();
 
+                } catch (IOException ea) {
+                ea.printStackTrace();
+                }
+                System.exit(0);
+            }
+    }
+});
 
     }
     public static String formatArrayList(ArrayList<String> list) {
