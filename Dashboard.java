@@ -35,6 +35,7 @@ public class Dashboard
     {
 
         String fileName = "user_information.txt";
+        String name = null;
         String securityQuestion = null;
         String securityAnswer = null;
         String savedUsername = null;
@@ -55,9 +56,10 @@ public class Dashboard
             sc.close();
             
             while ((line = reader.readLine()) != null) {
-                if (line.startsWith("Username: ")) {
-                    savedUsername = line.substring(10);
-
+                if (line.startsWith("Name: ")) {
+                    name = line.substring(6);
+                    savedUsername = reader.readLine();
+                    savedUsername = savedUsername.substring(10);
                     // Read the next line for password
                     passwordLine = reader.readLine();
                     passwordLine = passwordLine.substring(10);
@@ -88,7 +90,7 @@ public class Dashboard
       dp.setBackground(new Color(247, 205, 208));
       
       //Create header label
-      JLabel header1 = new JLabel("Welcome " + savedUsername);
+      JLabel header1 = new JLabel("Welcome " + name);
       header1.setBounds(100,100,500,80);
       header1.setFont(new Font("Serif", Font.BOLD,55));
       window4.add(header1);
@@ -170,7 +172,10 @@ public class Dashboard
                 String fileContents = buffer.toString();
                 sc.close();
                 while ((line = reader.readLine()) != null) {
-                    if (line.startsWith("Username: ")) {
+                    if (line.startsWith("Name: ")) {
+
+                        
+                        savedUsername = reader.readLine();
                         savedUsername = line.substring(10);
 
                         // Read the next line for password
