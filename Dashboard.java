@@ -1,4 +1,5 @@
 package choresmania;
+
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Font;
@@ -17,11 +18,17 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 public class Dashboard 
 {
-
+ private final JTextField chore1 = new JTextField();
+ private final JTextField chore2 = new JTextField();
+ private final JTextField chore3 = new JTextField();
+ private final JTextField chore4 = new JTextField();
      public Dashboard()
     {
 
@@ -31,10 +38,6 @@ public class Dashboard
         String savedUsername = null;
         String passwordLine = null;
         String email = null;
-        String family1 = null;
-        String family2 = null;
-        String family3 = null;
-        String family4 = null;
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line;
             Scanner sc = new Scanner(new File(fileName));
@@ -61,14 +64,8 @@ public class Dashboard
                     securityQuestion = reader.readLine();
                     securityAnswer = reader.readLine();
                     String choresList = reader.readLine();
-                    family1 = reader.readLine();
-                    family2 = reader.readLine();
-                    family3 = reader.readLine();
-                    family4 = reader.readLine();
-                    choresList = choresList.substring(8);
+                    choresList = choresList.substring(9+savedUsername.length());
                     if(loginCheck.endsWith("true")){
-                        System.out.println("Current user: " + savedUsername);
-                        System.out.println("Chores: " + choresList);
                         break;
                     }
                     }
@@ -102,23 +99,23 @@ public class Dashboard
       td_chores.setFont(new Font("Serif",Font.PLAIN,30));
       window4.add(td_chores);
 
-      JTextField chore1 = new JTextField();
+      
       chore1.setBounds(100,500,200,40);
       window4.add(chore1);
       chore1.getText();
       
 
-      JTextField chore2 = new JTextField();
+      
       chore2.setBounds(100,600,200,40);
       window4.add(chore2);
       chore2.getText();
 
-      JTextField chore3 = new JTextField();
+      //JTextField chore3 = new JTextField();
       chore3.setBounds(100,700,200,40);
       window4.add(chore3);
       chore3.getText();
 
-      JTextField chore4 = new JTextField();
+      //JTextField chore4 = new JTextField();
       chore4.setBounds(100,800,200,40);
       window4.add(chore4);
       chore4.getText();
@@ -149,11 +146,14 @@ public class Dashboard
             String email = null;
             String chores = null;
             ArrayList<String> allChores = new ArrayList<String>();
-            String getValue = chore1.getText();
             allChores.add(chore1.getText());
             allChores.add(chore2.getText());
             allChores.add(chore3.getText());
             allChores.add(chore4.getText());
+            System.out.println(allChores);
+            Collections.shuffle(allChores);
+            System.out.println(allChores);
+            String formattedChores = formatArrayList(allChores);
             try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
                 String line;
                 Scanner sc = new Scanner(new File(fileName));
@@ -163,7 +163,6 @@ public class Dashboard
                 }
                 String fileContents = buffer.toString();
                 sc.close();
-                
                 while ((line = reader.readLine()) != null) {
                     if (line.startsWith("Username: ")) {
                         savedUsername = line.substring(10);
@@ -177,10 +176,10 @@ public class Dashboard
                         securityQuestion = reader.readLine();
                         securityAnswer = reader.readLine();
                         String choresList = reader.readLine();
-                        chores = choresList.substring(8);
+                        chores = choresList.substring(9+savedUsername.length());
 
                         if(loginCheck.endsWith("true")){
-                            fileContents = fileContents.replace(choresList, "Chores: A, B, C, D");
+                            fileContents = fileContents.replace(choresList, savedUsername + " Chores: "+formattedChores);
                             FileWriter writer = new FileWriter(fileName);
                             System.out.println("");
                             System.out.println("new data: "+fileContents);
@@ -209,6 +208,26 @@ public class Dashboard
       window4.setResizable(false);
 
 
+    }
+    public static String formatArrayList(ArrayList<String> list) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < list.size(); i++) {
+            sb.append(list.get(i));
+            if (i < list.size() - 1) {
+                sb.append(", ");
+            }
+        }
+        return sb.toString();
+    }
+    //for the next page
+    /* Example usage 
+        String inputString = "A, B, C, D";
+        ArrayList<String> arrayList = convertToArrayList(inputString);
+        System.out.println(arrayList);
+    */
+    public static ArrayList<String> convertToArrayList(String inputString) {
+        List<String> stringList = Arrays.asList(inputString.split(",\\s*"));
+        return new ArrayList<>(stringList);
     }
     
 }
