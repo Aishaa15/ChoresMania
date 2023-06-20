@@ -164,7 +164,7 @@ public class SignUpPage extends JFrame {
             writer.println("Security Answer: " + securityAnswer);
             writer.println(username + " Chores: a, b, c, d");
             writer.println(username + " Grocery list: a, b, c, d");
-            writer.println("");
+            writer.println(" ");
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
