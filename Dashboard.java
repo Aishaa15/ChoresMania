@@ -30,6 +30,7 @@ public class Dashboard
  private final JTextField chore2 = new JTextField();
  private final JTextField chore3 = new JTextField();
  private final JTextField chore4 = new JTextField();
+ JTextArea grocerylist = new JTextArea();
  JFrame window4 = new JFrame("Dashboard");
      public Dashboard()
     {
@@ -135,7 +136,6 @@ public class Dashboard
       grocery.setBounds(550,350,500,70);
       window4.add(grocery);
 
-      JTextArea grocerylist = new JTextArea();
       grocerylist.setText(groceryList);
       grocerylist.setBounds(510,450,300,400);
       window4.add(grocerylist);
@@ -193,7 +193,7 @@ public class Dashboard
 
                         if(loginCheck.endsWith("true")){
                             fileContents = fileContents.replace(choresList, savedUsername + " Chores: " + formattedChores);
-                            fileContents = fileContents.replace(grocery, savedUsername + " Chores: " + groceryList);
+                            fileContents = fileContents.replace(grocery, savedUsername + " Grocery List: " + grocerylist.getText());
                             FileWriter writer = new FileWriter(fileName);
                             System.out.println("");
                             System.out.println("new data: "+fileContents);
