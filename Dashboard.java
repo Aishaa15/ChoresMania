@@ -213,6 +213,7 @@ public class Dashboard
             chore2.setText("");
             chore3.setText("");
             chore4.setText("");
+            ChoresRandomizer menu = new ChoresRandomizer();
         }
         
            
