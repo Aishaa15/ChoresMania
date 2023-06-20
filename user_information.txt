@@ -21,6 +21,7 @@ Security Answer: 6
 Name: aaaaaa
 Username: guy
 Password: 1
+Email: aaa
 guy Login: false
 Security Question: dfdsh
 Security Answer: ss
