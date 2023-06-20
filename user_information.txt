@@ -1,7 +1,7 @@
 Name: armeena
 Username: haha
 Password: dog
-haha Login: false
+haha Login: true
 Email: armeenasjaj
 Security Question: cat
 Security Answer: cat
@@ -16,14 +16,34 @@ Email: 4
 Security Question: 5
 Security Answer: 6
 2 Chores: ttt, bbb, eeee, aaa
-2 Grocery list: ksdjfsdgb
+2 Grocery list: 3fsd
 
 Name: aaaaaa
 Username: guy
 Password: 1
-Email: aaa
 guy Login: false
+Email: 112@asf.cs
 Security Question: dfdsh
 Security Answer: ss
 guy Chores: ttt, bbb, eeee, aaa
-guy Grocery list: ksdjfsdgb
+guy Grocery list: ksdjffds3sdgb
+
+Name: jjjj
+Username: abc
+Password: def
+abc Login: false
+Email: 112@asf.cs
+Security Question: no
+Security Answer: tes
+abc Chores: a, b, c, d
+abc Grocery list: a, b, c, d
+
+Name: fsdgds
+Username: ab
+Password: aaaa
+ab Login: false
+Email: aa
+Security Question: as
+Security Answer: s
+ab Chores: a, b, c, d
+ab Grocery list: a, b, c, d
