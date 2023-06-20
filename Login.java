@@ -64,7 +64,7 @@ public class Login extends JFrame {
         loginButton.setBounds(260, 320, 80, 40);
         loginButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                login();
+                Login();
             }
         });
 
@@ -115,11 +115,8 @@ public class Login extends JFrame {
                             
                             String loginInfo = reader.readLine();
                             String newLogin = username + " Login: true";
-                            System.out.println("old data: "+fileContents);
                             fileContents = fileContents.replace(loginInfo, newLogin);
                             FileWriter writer = new FileWriter(fileName);
-                            System.out.println("");
-                            System.out.println("new data: "+fileContents);
                             writer.append(fileContents);
                             System.out.println(loginInfo);
                             writer.close();
