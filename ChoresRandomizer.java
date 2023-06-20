@@ -65,7 +65,7 @@ public class ChoresRandomizer
       person4_label.setFont(new Font("Serif", Font.BOLD, 20));
       window5.add(person4_label);
 
-    JButton back_button = new JButton("Go Back");
+      JButton back_button = new JButton("Go Back");
       back_button.setBounds(90, 50, 100, 40);
       window5.add(back_button);
       back_button.addActionListener(new ActionListener() 
