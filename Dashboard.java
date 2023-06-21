@@ -132,14 +132,11 @@ public class Dashboard
       grocery.setFont(new Font("Serif",Font.PLAIN,30));
       grocery.setBounds(550,300,500,70);
       window4.add(grocery);
-
+     
       grocerylist.setText(groceryList);
       grocerylist.setBounds(510,400,300,400);
       window4.add(grocerylist);
 
-      grocerylist.setText(groceryList);
-      grocerylist.setBounds(510,450,300,400);
-      window4.add(grocerylist);
 
 
       gobtn.addActionListener(new ActionListener() 
