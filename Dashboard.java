@@ -83,7 +83,7 @@ public class Dashboard
             }
       
       //make login window
-      window4.setSize(1500,1500);
+      window4.setSize(1000,1000);
       
       //set background color
       Container dp = window4.getContentPane();
@@ -106,34 +106,36 @@ public class Dashboard
       window4.add(td_chores);
 
       
-      chore1.setBounds(100,500,200,40);
+      chore1.setBounds(100,450,200,40);
       window4.add(chore1);
       chore1.getText();
       
-
-      
-      chore2.setBounds(100,600,200,40);
+      chore2.setBounds(100,530,200,40);
       window4.add(chore2);
       chore2.getText();
 
       //JTextField chore3 = new JTextField();
-      chore3.setBounds(100,700,200,40);
+      chore3.setBounds(100,610,200,40);
       window4.add(chore3);
       chore3.getText();
 
       //JTextField chore4 = new JTextField();
-      chore4.setBounds(100,800,200,40);
+      chore4.setBounds(100,690,200,40);
       window4.add(chore4);
       chore4.getText();
 
       JButton gobtn = new JButton("GO");
-      gobtn.setBounds(1200,900,200,40);
+      gobtn.setBounds(700,850,200,40);
       window4.add(gobtn);
 
       JLabel grocery = new JLabel("Grocery List:");
       grocery.setFont(new Font("Serif",Font.PLAIN,30));
-      grocery.setBounds(550,350,500,70);
+      grocery.setBounds(550,300,500,70);
       window4.add(grocery);
+
+      grocerylist.setText(groceryList);
+      grocerylist.setBounds(510,400,300,400);
+      window4.add(grocerylist);
 
       grocerylist.setText(groceryList);
       grocerylist.setBounds(510,450,300,400);
