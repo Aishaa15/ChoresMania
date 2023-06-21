@@ -27,10 +27,8 @@ public class ChoresRandomizer
     JFrame window5 = new JFrame("Duty Assignment");
     public ChoresRandomizer()
     {
+      //Read file for chores, display the randomized chores under each person
       String fileName = "user_information.txt";
-      String name = null;
-      String securityQuestion = null;
-      String securityAnswer = null;
       String savedUsername = null;
       String passwordLine = null;
       String email = null;
@@ -47,7 +45,7 @@ public class ChoresRandomizer
         sc.close();
         while ((line = reader.readLine()) != null) {
           if (line.startsWith("Name: ")) {
-            name = line.substring(6);
+            line.substring(6);
             savedUsername = reader.readLine();
             savedUsername = savedUsername.substring(10);
             passwordLine = reader.readLine();
@@ -55,8 +53,8 @@ public class ChoresRandomizer
             String loginCheck = reader.readLine();
             email = reader.readLine();
             email = email.substring(7);
-            securityQuestion = reader.readLine();
-            securityAnswer = reader.readLine();
+            reader.readLine();
+            reader.readLine();
             String choresList = reader.readLine();
             choresList = choresList.substring(9+savedUsername.length());
             System.out.println("Chores list is: " +choresList);
@@ -87,7 +85,7 @@ public class ChoresRandomizer
       window5.add(person1);
 
       //make label for person1
-      JLabel person1_label = new JLabel(choresArrayList.get(0));//add chore randomized here
+      JLabel person1_label = new JLabel(choresArrayList.get(0));
       person1_label.setBounds(320,350,200,40);
       person1_label.setFont(new Font("Serif", Font.BOLD, 20));
       window5.add(person1_label);
@@ -141,6 +139,7 @@ public class ChoresRandomizer
       window5.setVisible(true);
       window5.setResizable(false);
       window5.addWindowListener(new java.awt.event.WindowAdapter() {
+      //exit and log out
       @Override
       public void windowClosing(java.awt.event.WindowEvent windowEvent) {
             if (JOptionPane.showConfirmDialog(window5, 
