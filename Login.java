@@ -59,6 +59,11 @@ public class Login extends JFrame {
         passwordField = new JPasswordField();
         passwordField.setBounds(300, 250, 200, 40);
 
+        ImageIcon cat_pic = new ImageIcon("/Users/armee/choresmania/demo/src/main/java/choresmania/cat2.png");
+        JLabel cat_label = new JLabel(cat_pic);
+        cat_label.setBounds(50,5, 1600, 1500);
+      
+
         // Login button
         JButton loginButton = new JButton("Login");
         loginButton.setBounds(260, 320, 80, 40);
@@ -73,6 +78,7 @@ public class Login extends JFrame {
         panel.add(usernameLabel);
         panel.add(usernameField);
         panel.add(passwordLabel);
+        panel.add(cat_label);
         panel.add(passwordField);
         panel.add(loginButton);
 
