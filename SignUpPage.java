@@ -163,7 +163,7 @@ public class SignUpPage extends JFrame {
             writer.println("Security Question: " + securityQuestion);
             writer.println("Security Answer: " + securityAnswer);
             writer.println(username + " Chores: a, b, c, d");
-            writer.println(username + " Grocery list: a, b, c, d");
+            writer.println(username + " Grocery list: ");
             writer.println(" ");
             writer.close();
         } catch (IOException e) {
