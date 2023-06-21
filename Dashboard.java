@@ -227,18 +227,48 @@ public class Dashboard
       window4.addWindowListener(new java.awt.event.WindowAdapter() {
       @Override
       public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+            String fileName = "user_information.txt";
+            String savedUsername = null;
+            String groceryList = null;
             if (JOptionPane.showConfirmDialog(window4, 
                 "Are you sure you want to exit? (This will log you out)", "Close Window?", 
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
-                String fileName = "user_information.txt";
                 try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+                    String line;
                     Scanner sc = new Scanner(new File(fileName));
                     StringBuffer buffer = new StringBuffer();
                     while (sc.hasNextLine()) {
-                        buffer.append(sc.nextLine()+System.lineSeparator());
+                    buffer.append(sc.nextLine()+System.lineSeparator());
+                }
+                String fileContents = buffer.toString();
+                sc.close();
+                while ((line = reader.readLine()) != null) {
+                    if (line.startsWith("Username: ")) {
+                        savedUsername = line.substring(10);
+
+                        // Read the next line for password
+                        reader.readLine();
+                        String loginCheck = reader.readLine();
+                        reader.readLine();
+                        reader.readLine();
+                        reader.readLine();
+                        reader.readLine();
+                        String grocery = reader.readLine();
+                        groceryList = grocery.substring(15+savedUsername.length());
+                        
+                        //save the grocery list to the file on exit
+                        if(loginCheck.endsWith("true")){
+                            fileContents = fileContents.replace(grocery, savedUsername + " Grocery List: " + grocerylist.getText());
+                            System.out.println("Saved username is: "+savedUsername);   
+                            FileWriter writer = new FileWriter(fileName);
+                            writer.append(fileContents);
+                            writer.close();
+                            break;
+                        }
+                        }
                     }
-                    String fileContents = buffer.toString();
+                    //log this account (everyone) out
                     fileContents = fileContents.replace("Login: true", "Login: false");
                     FileWriter writer = new FileWriter(fileName);
                     writer.append(fileContents);
